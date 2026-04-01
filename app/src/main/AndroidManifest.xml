@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- ==========================================
+         الصلاحيات (Permissions)
+         الحد الأدنى المطلوب للتطبيق الطبي
+         ========================================== -->
+    
+    <!-- إذن الاتصال بالإنترنت (فقط إذا كان التطبيق يرسل بيانات مشفرة للخادم) -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    
+    <!-- إذن التحقق من حالة الشبكة -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    
+    <!-- ملاحظة: نتجنب طلب صلاحيات الموقع، جهات الاتصال، أو الملفات إلا للضرورة القصوى -->
+
+    <application
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.NewLife"
+        android:networkSecurityConfig="@xml/network_security_config"
+        tools:targetApi="34">
+
+        <!-- ==========================================
+             الشاشات (Activities)
+             ========================================== -->
+
+        <!-- 1. شاشة تسجيل الدخول (نقطة الدخول الوحيدة) -->
+        <activity
+            android:name=".presentation.ui.login.LoginActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 2. لوحة تحكم الطبيب (محمية - لا تفتح من الخارج) -->
+        <activity
+            android:name=".presentation.ui.dashboard.DoctorDashboardActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:label="@string/title_dashboard" />
+
+        <!-- 3. ملف المريض (محمية) -->
+        <activity
+            android:name=".presentation.ui.patient.PatientProfileActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:label="@string/title_patient_profile" />
+
+        <!-- 4. شاشة الطوارئ (محمية وتظهر فوق القفل) -->
+        <activity
+            android:name=".presentation.ui.emergency.EmergencyActivity"
+            android:exported="false"
+            android:showOnLockScreen="true"
+            android:excludeFromRecents="true"
+            android:label="@string/title_emergency" />
+
+        <!-- 5. شاشة الإعدادات (محمية) -->
+        <activity
+            android:name=".presentation.ui.settings.SettingsActivity"
+            android:exported="false"
+            android:label="@string/title_settings" />
+
+    </application>
+
+</manifest>
