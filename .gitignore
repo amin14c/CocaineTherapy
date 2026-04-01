@@ -1,0 +1,57 @@
+# ==========================================
+# New Life App - Clinical Trial Security Config
+# ==========================================
+
+# --- ملفات البناء والنظام (Android Standard) ---
+*.iml
+.gradle/
+.idea/
+.DS_Store
+/build/
+/captures/
+/local.properties
+.hprof
+.cxx/
+*.keystore
+!debug.keystore
+
+# --- حماية البيانات الحساسة (CRITICAL FOR MEDICAL APP) ---
+# منع رفع أي قواعد بيانات قد تحتوي على سجلات مرضى حقيقية
+*.db
+*.db-journal
+*.sql
+/data/real_patient_data*
+/data/clinical_records*
+
+# منع رفع المفاتيح السرية وملفات التكوين
+secrets.properties
+api_keys.xml
+keystore.properties
+google-services.json
+*.jks
+*.p12
+
+# منع رفع لقطات الشاشة التي قد تظهر بيانات مرضى
+/screenshots/
+/fastlane/metadata/android/en-US/images/phoneScreenshots/*
+
+# --- ملفات السجلات والتقارير (Logs) ---
+# قد تحتوي السجلات على معلومات تكشف عن هوية المريض أو حالته
+*.log
+/logs/
+crashlytics.properties
+
+# --- الوثائق الحساسة (تخزن محلياً فقط) ---
+/docs/approval_ministry_signed.pdf
+/docs/patient_consent_forms.pdf
+/docs/identifiable_data*
+
+# --- ملفات النسخ الاحتياطي المؤقتة ---
+*.bak
+*.backup
+temp/
+tmp/
+
+# --- إعدادات المطور المحلية ---
+local.properties
+.gradle/local.properties
